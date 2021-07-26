@@ -13,7 +13,7 @@
 #     language: python
 #     name: python3
 # ---
-
+#%%
 # # 电商数据分析
 # ## 数据读入
 
@@ -274,3 +274,5 @@ country_total_percent
 
 
 
+
+# %%

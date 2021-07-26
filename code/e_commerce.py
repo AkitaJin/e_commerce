@@ -23,7 +23,7 @@ import matplotlib.pyplot as plt
 filepath = r'../data/data.csv'
 raw = pd.read_csv(filepath, encoding="ISO-8859-1")
 raw.head()
-
+#%%
 # ## 数据预处理
 
 
@@ -65,7 +65,7 @@ df1
 #将全部数据分为数量>=0的购买数据和数量<0的退货数据
 data_buy = df1[df1["Quantity"] >= 0]
 data_return = df1[df1["Quantity"] < 0]
-
+#%%
 # ## 帮助函数
 
 
@@ -77,7 +77,7 @@ def dist_cum_p(gp, bins):
     dist_cum_p = pd.concat([tmp1,tmp2], axis=1)
     dist_cum_p.columns=['bin_%', 'bin_%_cum']
     return dist_cum_p
-
+#%%
 # ## 商品维度分析
 # ### 最热卖的产品是哪些？退货最多的产品是哪些？
 
@@ -90,7 +90,7 @@ product_quantity = df2["Quantity"].groupby(df2["StockCode"]).sum().sort_values(a
 product_quantity.head(10)
 
 product_quantity.tail(10)
-
+#%%
 # ### 商品的价格分布如何？价格与销量有何关系？
 
 
@@ -129,7 +129,7 @@ qpdp
 quant_price_dist.plot()
 
 # 71.68%的商品销量集中在价格在2元以内的商品；99.7%的商品销量集中的价格在15元以内的商品。
-
+#%%
 # ### 退货商品的价格分布与退货量情况是怎样的？
 
 # +
@@ -165,7 +165,7 @@ return_quantity_price/return_quantity_price.sum()
 
 
 
-
+#%%
 # ## 顾客维度分析
 
 # ### 哪些顾客购买金额最多？
@@ -174,12 +174,12 @@ customer_total=data_buy["Total"].groupby(data_buy["CustomerID"]).sum().sort_valu
 customer_total.head(11)
 
 # 缺失客户ID的订单占比很大，后续分析可能有问题。
-
+#%%
 # ### 哪些顾客购买次数最频繁？
 
 customer_buy_fre=data_buy.drop_duplicates(["InvoiceNo"])["InvoiceNo"].groupby(data_buy["CustomerID"]).count().sort_values(ascending=False)
 customer_buy_fre[:20]
-
+#%%
 # ### 如何根据这两个变量对顾客分类？
 
 customer_total.drop("unknown",inplace=True)
@@ -191,7 +191,7 @@ plt.axhline(y=50000,c="green")
 plt.axvline(x=50,c="blue")
 
 # 可以根据顾客购买次数和购买金额，对顾客进行分组，采取不同的营销措施。
-
+#%%
 # ### 订单的商品种类分布是怎样的？
 
 order_type=data_buy["StockCode"].groupby(data_buy["InvoiceNo"]).count().sort_values(ascending=False)
@@ -211,7 +211,7 @@ order_type_r=data_return["StockCode"].groupby(data_return["InvoiceNo"]).count().
 pd.cut(order_type_r,bins=[0,10,20,30,40,50,60,150]).value_counts()
 
 # 退货顾客的商品种类大部分都在10以内。
-
+#%%
 # ### 哪些国家的顾客消费占比最大？
 
 # +
